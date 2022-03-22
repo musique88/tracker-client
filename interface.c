@@ -27,16 +27,18 @@ void update_page_interface(interface* interf) {
 			if(interf->col_positions[j] + interf->active_page->columns_size[j] > disp_cols) 
 				break;
 			char str[20];
-			get_string_from_page(interf->active_page, j, i, str);
+			get_string_from_page(interf->active_page, j, i + first_line, str);
 			for(unsigned int k = 0; k < interf->active_page->columns_size[j]; k++)
 				mvaddch(i + interf->top_bar_size, interf->col_positions[j] + k, str[k]);
 		}
 	}
-	move(interf->line + interf->top_bar_size, interf->col_positions[interf->col]);	
+	move(interf->line - first_line + interf->top_bar_size, interf->col_positions[interf->col]);	
 }
 
 void update_interface(interface* interf) {
+	erase();
 	update_page_interface(interf);
+	interf->callback(getch(), interf, NULL);
 	refresh();
 }
 

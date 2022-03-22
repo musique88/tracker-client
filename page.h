@@ -8,3 +8,5 @@ typedef struct {
 void set_line_to_page(page* p, char** line, unsigned int line_to_change);
 
 void get_string_from_page(page* p, unsigned int col, unsigned int line, char* out);
+
+void set_chars_to_page(page* p, unsigned int col, unsigned int line, char* in);
